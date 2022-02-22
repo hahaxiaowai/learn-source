@@ -1,180 +1,181 @@
-Hi, and thanks in advance for contributing to Mapbox GL. Here's how we work. Please follow these conventions when submitting an issue or pull request.
+嗨，提前感谢你对mapbox gl 的贡献，这里讲述的是我们如何工作，请按约定提交 issue 或 pr 。
 
-## Preparing your Development Environment
+## 准备你的开发环境
 
 ### OSX
 
-Install the Xcode Command Line Tools Package
+安装xcode命令行工具包
 ```bash
 xcode-select --install
 ```
 
-Install [node.js](https://nodejs.org/) version 14
+安装 [node.js 14](https://nodejs.org/)
 ```bash
 brew install node@14
 ```
-Install [yarn](https://yarnpkg.com/en/)
+安装 [yarn](https://yarnpkg.com/en/)
 ```bash
 brew install yarn
 ```
 
-Clone the repository
+克隆这个仓库
 ```bash
 git clone git@github.com:mapbox/mapbox-gl-js.git
 ```
 
-Install node module dependencies
+安装仓库依赖
 ```bash
 yarn install
 ```
 
 ### Linux
 
-Install [git](https://git-scm.com/), [node.js](https://nodejs.org/) version 14, [GNU Make](http://www.gnu.org/software/make/), and libglew-dev
+安装 [git](https://git-scm.com/), [node.js 14](https://nodejs.org/), [GNU Make](http://www.gnu.org/software/make/), 和 libglew-dev
 ```bash
 sudo apt-get update
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 sudo apt-get install build-essential git nodejs libglew-dev libxi-dev
 ```
 
-Install [yarn](https://yarnpkg.com/en/docs/install#linux-tab)
+安装 [yarn](https://yarnpkg.com/en/docs/install#linux-tab)
 ```bash
 curl -o- -L https://yarnpkg.com/install.sh | bash
 ```
-(It is also possible to install yarn from Debian/Ubuntu packages. See [yarn's install instructions](https://yarnpkg.com/en/docs/install#linux-tab)).
+(也可能在安装Debian/Ubuntu时安装了yarn. 参考 [yarn's install instructions](https://yarnpkg.com/en/docs/install#linux-tab)).
 
-Clone the repository
+克隆仓库
 ```bash
 git clone git@github.com:mapbox/mapbox-gl-js.git
 ```
 
-Install node module dependencies
+安装依赖
 ```bash
 yarn install
 ```
 
 ### Windows
 
-Install [git](https://git-scm.com/), [node.js](https://nodejs.org/) version 14, [yarn](https://yarnpkg.com/en/docs/install#windows-tab), [npm and node-gyp](https://github.com/Microsoft/nodejs-guidelines/blob/master/windows-environment.md#compiling-native-addon-modules).
+安装 [git](https://git-scm.com/), [node.js 14](https://nodejs.org/), [yarn](https://yarnpkg.com/en/docs/install#windows-tab), [npm 和 node-gyp](https://github.com/Microsoft/nodejs-guidelines/blob/master/windows-environment.md#compiling-native-addon-modules).
 
-Clone the repository
+克隆仓库
 ```bash
 git clone git@github.com:mapbox/mapbox-gl-js.git
 ```
 
 
-Install node module dependencies
+安装依赖
 ```bash
 yarn install
 ```
 
-Install headless-gl dependencies https://github.com/stackgl/headless-gl#windows
+安装依赖 headless-gl  https://github.com/stackgl/headless-gl#windows
 ```
 copy node_modules/headless-gl/deps/windows/dll/x64/*.dll c:\windows\system32
 ```
 
-## Serving the Debug Page
+## 启动调试页面
 
-Start the debug server
+启动调试服务
 
 ```bash
-MAPBOX_ACCESS_TOKEN={YOUR_MAPBOX_ACCESS_TOKEN} yarn run start-debug
+MAPBOX_ACCESS_TOKEN={你申请的key} yarn run start-debug
 ```
 
-Open the debug page at [http://localhost:9966/debug](http://localhost:9966/debug)
+在 [http://localhost:9966/debug](http://localhost:9966/debug) 打开调试页面
 
-## Creating a Standalone Build
+## 打包
 
-A standalone build allows you to turn the contents of this repository into `mapbox-gl.js` and `mapbox-gl.css` files that can be included on an html page.
+打包可以将仓库的内容集中在  `mapbox-gl.js` 和 `mapbox-gl.css` 两个文件中，这可以在html页面中更方便的使用.
 
-To create a standalone build, run
+打包需要运行：
 ```bash
 yarn run build-prod-min
 yarn run build-css
 ```
 
-Once those commands finish, you will have a standalone build at `dist/mapbox-gl.js` and `dist/mapbox-gl.css`
+一旦打包完成，便会生成 `dist/mapbox-gl.js` 和 `dist/mapbox-gl.css` 两个打包文件中
 
-## Writing & Running Tests
+## 编写代码 & 运行测试
 
-See [`test/README.md`](./test/README.md).
+参考 [`test/README.md`](./test/README.md).
 
-## Writing & Running Benchmarks
+## 编写代码 & 运行原型（性能测试）
 
-See [`bench/README.md`](./bench/README.md).
+参考 [`bench/README.md`](./bench/README.md).
 
-## Code Conventions
+## 代码约定
 
-* We use [`error` events](https://www.mapbox.com/mapbox-gl-js/api/#Map.event:error) to report user errors.
-* We use [`assert`](https://nodejs.org/api/assert.html) to check invariants that are not likely to be caused by user error. These `assert` statements are stripped out of production builds.
-* We use the following ES6 features:
+* 我们使用 [`error` events（错误事件）](https://www.mapbox.com/mapbox-gl-js/api/#Map.event:error) 返回用户错误.
+* 我们使用 [`assert`](https://nodejs.org/api/assert.html)来检查非用户错误引起的不变量。这些`assert`语句被从生产构建中剥离出来。
+* 我们使用一下es6的特性:
   * `let`/`const`
-  * `for...of` loops
-  * Arrow functions
-  * Classes
-  * Template strings
-  * Computed and shorthand object properties
-  * Default parameters
-  * Rest parameters
-  * Destructuring
-  * Modules
-  * Spread (`...`) operator
-  * Iterators and generators
-  * "Library" features such as `Map`, `Set`, `array.find`, etc.
+  * `for...of` 循环
+  * 箭头函数
+  * Class 类
+  * 模板字符串
+  * 计算和简写对象属性
+  * 默认参数
+  * 剩余参数
+  * 解构
+  * 模块
+  * `...`
+  * 迭代器和生成器
+  * `Map`, `Set`, `array.find` 等.
 
-The conventions for module exports are:
+导出模块约定如下:
 
-* No exported "namespace objects" -- modules should export either classes or functions, with an occasional exception as needed for stubbing.
-* If a module exports something with the same name as the file name (modulo case), it should be the default export.
-* Anything else should be a named export.
+* 不导出命名空间对象 -- 模块导出应是 类（classes）或 函数（functions）, 以及根据需要偶尔的异常.
+* 如果导出模块和文件名相同 (模块的情况下), 它应该是默认导出的.
+* 任何东西都需要一个命名导出.
 
-### Version Control Conventions
+### 版本控制如下
 
-* We use [rebase merging](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) (as opposed to [basic merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging#Basic-Merging)) to merge branches
+* 我们使用 [rebase merging](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) (而不是 [basic merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging#Basic-Merging)) 合并分支
 
-Here is a recommended way to get setup:
-1. Fork this project
-2. Clone your new fork, `git clone git@github.com:GithubUser/mapbox-gl-js.git`
+以下是推荐的获得设置的方式:
+1. fork仓库
+2. 克隆fork的仓库, `git clone git@github.com:GithubUser/mapbox-gl-js.git`
 3. `cd mapbox-gl-js`
-4. Add the Mapbox repository as an upstream repository: `git remote add upstream git@github.com:mapbox/mapbox-gl-js.git`
-5. Create a new branch `git checkout -b your-branch` for your contribution
-6. Write code, open a PR from your branch when you're ready
-7. If you need to rebase your fork's PR branch onto main to resolve conflicts: `git fetch upstream`, `git rebase upstream/main` and force push to Github `git push --force origin your-branch`
+4. 添加官方仓库作为上游仓库: `git remote add upstream git@github.com:mapbox/mapbox-gl-js.git`
+5. 为你的贡献建立新的分支 `git checkout -b your-branch`
+6. 编写代码，当准备好时从你的分支上打开一个PR
+7. 如果需要解决PR分支与主分支的冲突，你需要: `git fetch upstream`, `git rebase upstream/main` 并且强行推送到GitHub上 `git push --force origin your-branch`
 
-## Changelog Conventions
+## 更新日志约定（以下为纯机翻）
 
-`CHANGELOG.md` is a valuable document many people read. It contains a formatted, lightly editorialized history of changes in the project. Pull requests are the unit of change and are normally categorized and summarized when reviewed. The changelog is maintained by combining automated content search and formatting with a final human edit.
+`CHANGELOG.md` 是许多人阅读且有价值的文件。它包含一个格式化的轻微编辑的项目历史。以拉请求为改变的单位，在审查时通常被分类和总结。通过将自动化内容搜索和格式化与最终人类编辑组合来维护更改内容。
 
-What warrants a changelog entry?
+如何保证更改日志条目?
 
-- Any change that affects the public API, visual appearance or user security *must* have a changelog entry
-- Any performance improvement or bugfix *should* have a changelog entry
-- Any contribution from a community member *may* have a changelog entry, no matter how small (accompanied by a hat-tip in the final changelog: `(h/t [<user>](https://github.com/<user>))`)
-- Any documentation related changes *should not* have a changelog entry
-- Any regression change introduced and fixed within the same release *should not* have a changelog entry
-- Any internal refactoring, technical debt reduction, render test, unit test or benchmark related change *should not* have a changelog entry
+- 影响公共API，视觉外观或用户安全性的任何更改必须*具有更改内容条目
+- 任何绩效改进或错误修复*应该*有一个变更词
+- 社区成员*可能*的任何贡献*都有一个更加平兴的条目，无论多么小（伴随着最终的变更歌曲: `(h/t [<user>](https://github.com/<user>))`)
+- 任何文档相关的更改*不应该*有一个更改的条目
+- 在同一版本中引入和修复的任何回归变更*不应该*具有更改内容
+- 任何内部重构，技术债务减少，渲染测试，单位测试或基准相关变更*不应*具有更改内容
 
-How to add your changelog? Changelog entries are written inside the `<changelog></changelog>` tag in the PR template. A changelog entry should:
+如何添加你的变更记录？ChangeLog条目是写在Pr模板中的`<changelog></changelog>`标记内。更长孔条目应该：
 
-- be descriptive and concise; it should explain the change to a reader without context
-- describe the surface bug and not the underlying problem. This might require some research.
-- be labeled `skip changelog` if the PR has no impact on end users and does not require a changelog entry
-- be labeled `breaking change` if the PR is a breaking change
-- reference a PR and optionally an issue.
 
-## Documentation Conventions
+- 是描述性和简洁的;它应该解释没有上下文的读者的变化
+- 描述表面错误，而不是潜在的问题。这可能需要一些研究。.
+- 如果PR对最终用户没有影响，则被标记为`Skip ChangeLog`，并且不需要更改日志条目
+- 被标记为`breaking change`如果PR是破坏的变化
+- 引用PR和可选的问题.
 
-See [`README.md`](https://github.com/mapbox/mapbox-gl-js-docs/blob/publisher-production/README.md) from [`mapbox-gl-js-docs`](https://github.com/mapbox/mapbox-gl-js-docs/).
+## 文档约束
 
-### Github Issue Labels
+从 [`mapbox-gl-js-docs`](https://github.com/mapbox/mapbox-gl-js-docs/) 参考[`README.md`](https://github.com/mapbox/mapbox-gl-js-docs/blob/publisher-production/README.md).
 
-Our labeling system is
+### Github Issue 标签
 
- - **minimalistic:** Labels' usefulness are inversely proportional to how many we have.
- - **objective:** Labels should be objective enough that any two people would agree on a labeling decision.
- - **useful:** Labels should track state or capture semantic meaning that would otherwise be hard to search.
+我们的标签系统是
 
-We have divided our labels into categories to make them easier to use.
+ - **minimalistic:** 标签的有用性与我们有多少成反比成反比.
+ - **objective:** 标签应该是有目的，以至于任何两个人都会就标签决定一致.
+ - **useful:** 标签应该跟踪状态或捕获语义含义，否则将很难搜索.
+
+我们将我们的标签划分为类别，使他们更容易使用.
 
  - type (blue)
  - actionable status (red)
@@ -182,19 +183,19 @@ We have divided our labels into categories to make them easier to use.
  - importance / urgency (green)
  - topic / project / misc (yellow)
 
-## Recommended Reading
+## 推荐阅读
 
-### Learning WebGL
+### 学习 WebGL
 
 - [Greggman's WebGL articles](http://webglfundamentals.org/)
 - [WebGL reference card](http://www.khronos.org/files/webgl/webgl-reference-card-1_0.pdf)
 
-### GL Performance
+### GL 性能表现
 
 - [Debugging and Optimizing WebGL applications](https://docs.google.com/presentation/d/12AGAUmElB0oOBgbEEBfhABkIMCL3CUX7kdAPLuwZ964)
 - [Graphics Pipeline Performance](http://developer.download.nvidia.com/books/HTML/gpugems/gpugems_ch28.html)
 
-### Misc
+### 杂项
 
 - [Drawing Antialiased Lines with OpenGL](https://blog.mapbox.com/drawing-antialiased-lines-with-opengl-8766f34192dc)
 - [Drawing Text with Signed Distance Fields in Mapbox GL](https://blog.mapbox.com/drawing-text-with-signed-distance-fields-in-mapbox-gl-b0933af6f817)
